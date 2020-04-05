@@ -23,7 +23,8 @@ int score = 0;
 int max_x = 0;
 int max_y = 0;
 
-Position *create_pos(int x, int y) {
+Position *create_pos(int x, int y)
+{
   Position *pos = malloc(sizeof(*pos));
 
   pos->x = x;
@@ -33,7 +34,8 @@ Position *create_pos(int x, int y) {
   return pos;
 }
 
-Position *create_snake() {
+Position *create_snake() 
+{
   Position *a = create_pos(2, 3);
   Position *b = create_pos(2, 2);
   
@@ -42,12 +44,14 @@ Position *create_snake() {
   return a;
 }
 
-void add_food() {
+void add_food()
+{
   food.x = (rand() % (max_x - 20)) + 10;
   food.y = (rand() % (max_y - 10)) + 5;
 }
 
-Direction get_next_dir(Direction prev) {
+Direction get_next_dir(Direction prev) 
+{
   int ch = getch();
 
   switch (ch) {
@@ -64,7 +68,8 @@ Direction get_next_dir(Direction prev) {
   }
 }
 
-Position *next_pos(Position *snake, Direction dir) {
+Position *next_pos(Position *snake, Direction dir) 
+{
   int next_x = snake->x;
   int next_y = snake->y;
 
@@ -86,7 +91,8 @@ Position *next_pos(Position *snake, Direction dir) {
   return create_pos(next_x, next_y);
 }
 
-void move_snake(Direction dir) {
+void move_snake(Direction dir) 
+{
   Position *snake_start = next_pos(snake, dir);
   
   if (snake_start->x == food.x && snake_start->y == food.y) {
@@ -109,15 +115,18 @@ void move_snake(Direction dir) {
   snake_end->next = NULL;
 }
 
-void draw_snake() {
+void draw_snake() 
+{
   Position *pos = snake;
+
   while (pos) {
     mvaddch(pos->y, pos->x, 'O');
     pos = pos->next;
   }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) 
+{
   initscr();
   noecho();
   cbreak();
@@ -148,5 +157,6 @@ int main(int argc, char *argv[]) {
 
   endwin();
   nocbreak();
+
   exit(EXIT_SUCCESS);
 }
